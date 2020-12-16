@@ -38,6 +38,10 @@ export default class events1608071969865 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'address',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

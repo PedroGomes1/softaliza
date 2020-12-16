@@ -33,6 +33,9 @@ export default class Events {
   @Column()
   telephone: string;
 
+  @Column()
+  address: string;
+
   @OneToOne(() => EventCategory)
   @JoinColumn({ name: 'category_id' })
   category_id: EventCategory;

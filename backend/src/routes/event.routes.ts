@@ -17,6 +17,7 @@ routes.post(
       hour: Joi.string().required(),
       email: Joi.string().email().required(),
       telephone: Joi.string().required().min(10).max(14),
+      address: Joi.string().required(),
       category_id: Joi.number().required(),
     },
   }),
@@ -33,6 +34,7 @@ routes.put(
       hour: Joi.string().required(),
       email: Joi.string().email().required(),
       telephone: Joi.string().required(),
+      address: Joi.string().required(),
       category_id: Joi.number().required(),
     },
     [Segments.PARAMS]: Joi.object().keys({

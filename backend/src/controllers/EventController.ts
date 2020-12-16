@@ -19,6 +19,7 @@ class EventController {
       hour,
       email,
       telephone,
+      address,
       category_id,
     } = request.body;
 
@@ -31,6 +32,7 @@ class EventController {
       hour,
       email,
       telephone,
+      address,
       category_id,
     });
 
@@ -49,6 +51,7 @@ class EventController {
       hour,
       email,
       telephone,
+      address,
       category_id,
     } = request.body;
 
@@ -67,6 +70,7 @@ class EventController {
       hour,
       email,
       telephone,
+      address,
       category_id,
     };
 
