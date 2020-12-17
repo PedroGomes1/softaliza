@@ -23,6 +23,8 @@ class EventController {
       category_id,
     } = request.body;
 
+    const requestImage = request.file;
+
     const eventRepository = getRepository(Event);
 
     const events = eventRepository.create({
@@ -34,6 +36,7 @@ class EventController {
       telephone,
       address,
       category_id,
+      image_url: requestImage.path,
     });
 
     await eventRepository.save(events);
