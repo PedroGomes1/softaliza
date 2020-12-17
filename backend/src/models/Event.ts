@@ -10,7 +10,7 @@ import {
 
 import EventCategory from './EventCategory';
 
-@Entity()
+@Entity('events')
 export default class Events {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -39,6 +39,9 @@ export default class Events {
   @OneToOne(() => EventCategory)
   @JoinColumn({ name: 'category_id' })
   category_id: EventCategory;
+
+  @Column()
+  image_url: string;
 
   @CreateDateColumn()
   created_at: Date;

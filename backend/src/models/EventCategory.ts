@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('event_category')
 export default class EventCategory {
   @PrimaryGeneratedColumn('increment')
   id: number;
