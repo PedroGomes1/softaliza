@@ -1,11 +1,13 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import Form from "../../components/SessionForms";
 import Input from "../../components/Input";
 import { signInRequest } from "../../store/modules/auth/action";
+import { signInSchema } from "../../validations";
 
-interface SignInPropsForm {
+export interface SignInPropsForm {
   email: string;
   password: string;
 }
@@ -13,7 +15,9 @@ interface SignInPropsForm {
 const SignIn: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm<SignInPropsForm>({
+    resolver: yupResolver(signInSchema),
+  });
 
   const handleLogin = useCallback(
     (data: SignInPropsForm) => {
@@ -32,6 +36,7 @@ const SignIn: React.FC = () => {
         name="email"
         type="email"
         label="Seu e-mail"
+        error={errors.email?.message}
         required
         register={register}
       />
@@ -40,6 +45,7 @@ const SignIn: React.FC = () => {
         name="password"
         type="password"
         required
+        error={errors.password?.message}
         label="Sua senha"
         register={register}
       />
