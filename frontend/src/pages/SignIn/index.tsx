@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import Form from "../../components/SessionForms";
+import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { signInRequest } from "../../store/modules/auth/action";
 import { signInSchema } from "../../validations";
@@ -33,6 +33,7 @@ const SignIn: React.FC = () => {
         title="Faça seu login"
         buttonSubmitText="Entrar"
         handleSubmitForm={handleSubmit(handleLogin)}
+        routeBack="/"
       >
         <Input
           name="email"

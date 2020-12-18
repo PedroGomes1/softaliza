@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
-import Form from "../../components/SessionForms";
+import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { signUpSchema } from "../../validations";
 import api from "../../services/api";
@@ -46,6 +46,7 @@ const SignUp: React.FC = () => {
         title="Crie sua conta"
         buttonSubmitText="Criar conta"
         handleSubmitForm={handleSubmit(handleSignUp)}
+        routeBack="/"
       >
         <Input
           name="name"
