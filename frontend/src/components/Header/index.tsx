@@ -10,7 +10,7 @@ const Header: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleNavigateEventTypes = useCallback(() => {
+  const handleNavigateEventCategory = useCallback(() => {
     history.push("/event-category");
   }, [history]);
 
@@ -22,6 +22,10 @@ const Header: React.FC = () => {
     history.push("/mainpage");
   }, [history]);
 
+  const handleNavigateRegisterEvent = useCallback(() => {
+    history.push("/register/event");
+  }, [history]);
+
   return (
     <Container>
       <button type="button" onClick={handleNavigateToMainPage}>
@@ -29,8 +33,10 @@ const Header: React.FC = () => {
       </button>
 
       <RightHeader>
-        <button type="button">Cadastrar eventos</button>
-        <button type="button" onClick={handleNavigateEventTypes}>
+        <button type="button" onClick={handleNavigateRegisterEvent}>
+          Cadastrar eventos
+        </button>
+        <button type="button" onClick={handleNavigateEventCategory}>
           Categoria dos eventos
         </button>
         <Separator />
