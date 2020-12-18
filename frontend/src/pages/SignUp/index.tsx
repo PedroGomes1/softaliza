@@ -1,9 +1,12 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 import Form from "../../components/SessionForms";
 import Input from "../../components/Input";
 import { signUpSchema } from "../../validations";
+import api from "../../services/api";
 
 interface SignUpPropsForm {
   name: string;
@@ -12,13 +15,29 @@ interface SignUpPropsForm {
 }
 
 const SignUp: React.FC = () => {
+  const history = useHistory();
+
   const { register, handleSubmit, errors } = useForm<SignUpPropsForm>({
     resolver: yupResolver(signUpSchema),
   });
 
-  const handleSignUp = useCallback((data: SignUpPropsForm) => {
-    console.log(data);
-  }, []);
+  const handleSignUp = useCallback(
+    async ({ name, email, password }: SignUpPropsForm) => {
+      try {
+        await api.post("user", {
+          name,
+          email,
+          password,
+        });
+
+        history.push("/signin");
+        toast.success("Cadastro realizado com sucesso, faça seu login");
+      } catch (error) {
+        toast.error("Ocorreu um erro ao tentar fazer seu cadastro!");
+      }
+    },
+    [history]
+  );
 
   return (
     <Form
