@@ -30,6 +30,8 @@ const Auth: Reducer<UserLoggedProps> = (state = INITIAL_STATE, action) => {
       }
       case ActionTypes.signOut: {
         draft.token = "";
+        draft.name = "";
+        draft.email = "";
         break;
       }
 
