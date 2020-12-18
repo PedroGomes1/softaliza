@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { MdAddBox, MdEdit, MdDeleteForever } from "react-icons/md";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import Header from "../../components/Header";
 import api from "../../services/api";
 import { Container, Table } from "./styles";
@@ -38,6 +39,29 @@ const EventCategory: React.FC = () => {
       });
     },
     [history]
+  );
+
+  const handleDeleteEventCategory = useCallback(
+    async (id: number) => {
+      const confirmation = window.confirm(
+        "Deseja realmente deletar o registro?"
+      );
+
+      if (confirmation) {
+        try {
+          await api.delete(`event-category/${id}`);
+
+          toast.success("Registro deletado com sucesso");
+
+          setEventsCategory(
+            eventsCategory.filter((eventCategory) => eventCategory.id !== id)
+          );
+        } catch (error) {
+          toast.error("Erro ao deletar registro");
+        }
+      }
+    },
+    [eventsCategory]
   );
 
   return (
@@ -79,6 +103,7 @@ const EventCategory: React.FC = () => {
                   size={25}
                   title="Excluir tipo"
                   color="#ffffff"
+                  onClick={() => handleDeleteEventCategory(eventCategory.id)}
                 />
               </td>
             </tr>
