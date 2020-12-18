@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
   return (
     <Container>
       <Header>
-        <img src={logoEventSystem} alt="" />
+        <img src={logoEventSystem} alt="Logo event system" />
 
         <Navigation>
           <button type="button" onClick={handleNavigateToListEvents}>
@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
           </h3>
         </div>
 
-        <img src={eventsImage} alt="" />
+        <img src={eventsImage} alt="Imagem principal dos eventos" />
       </Content>
     </Container>
   );
