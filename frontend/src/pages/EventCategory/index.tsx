@@ -57,9 +57,11 @@ const EventCategory: React.FC = () => {
 
       <Table>
         <thead>
-          <th>ID</th>
-          <th>Descrição</th>
-          <th>Ações</th>
+          <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
         </thead>
         <tbody>
           {eventsCategory.map((eventCategory) => (
