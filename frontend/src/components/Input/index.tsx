@@ -10,6 +10,7 @@ type InputProps = React.DetailedHTMLProps<
   register: ({ required }: { required?: boolean }) => RefReturn;
   icon?: React.ComponentType<IconBaseProps>;
   error?: string;
+  defaultValue?: string | number;
 };
 
 type RefReturn =
@@ -28,6 +29,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   label,
   error,
+  defaultValue,
   ...rest
 }) => (
   <>
@@ -38,6 +40,7 @@ const Input: React.FC<InputProps> = ({
         type={type}
         name={name}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         ref={register({ required })}
         {...rest}
       />
