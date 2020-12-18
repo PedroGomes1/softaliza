@@ -1,7 +1,9 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import Form from "../../components/SessionForms";
 import Input from "../../components/Input";
+import { signInRequest } from "../../store/modules/auth/action";
 
 interface SignInPropsForm {
   email: string;
@@ -9,11 +11,16 @@ interface SignInPropsForm {
 }
 
 const SignIn: React.FC = () => {
+  const dispatch = useDispatch();
+
   const { register, handleSubmit } = useForm();
 
-  const handleLogin = useCallback((data: SignInPropsForm) => {
-    console.log(data);
-  }, []);
+  const handleLogin = useCallback(
+    (data: SignInPropsForm) => {
+      dispatch(signInRequest(data));
+    },
+    [dispatch]
+  );
 
   return (
     <Form
@@ -22,7 +29,7 @@ const SignIn: React.FC = () => {
       handleSubmitForm={handleSubmit(handleLogin)}
     >
       <Input
-        name="name"
+        name="email"
         type="email"
         label="Seu e-mail"
         required
