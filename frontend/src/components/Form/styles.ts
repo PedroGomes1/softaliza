@@ -41,6 +41,31 @@ export const Container = styled.div`
         background-color: #4aadf0;
       }
     }
+
+    label {
+      display: block;
+      margin: 2rem 0 0.5rem;
+      font-size: 1.6rem;
+      font-family: "Poppins", sans-serif;
+      color: #ffffff;
+    }
+
+    textarea {
+      width: 100%;
+      resize: vertical;
+      border-radius: 0.8rem;
+      min-height: 12.8rem;
+      padding: 1rem 1.5rem;
+      font-size: 1.6rem;
+      font-family: "Poppins", sans-serif;
+    }
+
+    select {
+      width: 100%;
+      height: 6rem;
+      padding: 0 1.5rem;
+      border-radius: 0.8rem;
+    }
   }
 `;
 
