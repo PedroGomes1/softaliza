@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
+import { toast } from "react-toastify";
 import { UserLoggedProps } from "./types";
 import { ActionTypes } from "./types";
 import { signInRequest, signInSuccess, signInFailure } from "./action";
@@ -23,7 +24,7 @@ function* signIn({ payload }: signInRequestType) {
     yield put(signInSuccess(response.data));
   } catch (error) {
     yield put(signInFailure());
-    alert("error");
+    toast.error("Erro ao fazer seu login");
   }
 }
 
