@@ -1,6 +1,9 @@
 import React, { useCallback } from "react";
 import { IoMdArrowBack } from "react-icons/io";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { IState } from "../../store";
+import { UserLoggedProps } from "../../store/modules/auth/types";
 import { Container, Form } from "./styles";
 
 interface SessionFormsProps {
@@ -16,6 +19,10 @@ const SessionForms: React.FC<SessionFormsProps> = ({
   handleSubmitForm,
 }) => {
   const history = useHistory();
+
+  const { loading } = useSelector<IState, UserLoggedProps>(
+    (state) => state.auth
+  );
 
   const handleNavigateToHomePage = useCallback(() => {
     history.push("/");
@@ -36,7 +43,9 @@ const SessionForms: React.FC<SessionFormsProps> = ({
 
           {children}
 
-          <button type="submit">{buttonSubmitText}</button>
+          <button type="submit">
+            {loading ? "Carregando..." : buttonSubmitText}
+          </button>
         </fieldset>
       </Form>
     </Container>
