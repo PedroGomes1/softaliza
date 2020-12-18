@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 2.5rem 3rem;
-
   margin: 0 auto;
 
   > div {
@@ -29,6 +27,10 @@ export const Container = styled.div`
         opacity: 0.8;
       }
     }
+
+    @media (max-width: 450px) {
+      width: 80%;
+    }
   }
 `;
 
@@ -42,7 +44,6 @@ export const Table = styled.table`
   tr,
   td,
   th {
-    width: 50%;
     font-size: 1.4rem;
     color: #ffffff;
     font-family: "Poppins", sans-serif;
@@ -76,5 +77,9 @@ export const Table = styled.table`
     svg + svg {
       margin-left: 0.5rem;
     }
+  }
+
+  @media (max-width: 450px) {
+    width: 80%;
   }
 `;

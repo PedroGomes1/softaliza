@@ -30,6 +30,16 @@ const EventCategory: React.FC = () => {
     history.push("/register/event-category");
   }, [history]);
 
+  const handleNavigateEditEventCategory = useCallback(
+    ({ id, description }: EventsCategoryProps) => {
+      history.push("/edit/event-category", {
+        id,
+        description,
+      });
+    },
+    [history]
+  );
+
   return (
     <Container>
       <Header />
@@ -57,9 +67,14 @@ const EventCategory: React.FC = () => {
               <td>{eventCategory.id}</td>
               <td>{eventCategory.description}</td>
               <td>
-                <MdEdit size={20} title="Editar tipo" color="#ffffff" />
+                <MdEdit
+                  size={25}
+                  title="Editar tipo"
+                  color="#ffffff"
+                  onClick={() => handleNavigateEditEventCategory(eventCategory)}
+                />
                 <MdDeleteForever
-                  size={20}
+                  size={25}
                   title="Excluir tipo"
                   color="#ffffff"
                 />
