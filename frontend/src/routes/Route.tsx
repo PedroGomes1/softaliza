@@ -6,6 +6,10 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import { IState } from "../store";
+import { UserLoggedProps } from "../store/modules/auth/types";
+
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
   component: React.ComponentType;
@@ -16,15 +20,15 @@ const Route: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const user = undefined;
+  const { token } = useSelector<IState, UserLoggedProps>((state) => state.auth);
   return (
     <ReactDOMRoute
       {...rest}
       render={() => {
-        return isPrivate === !!user ? (
+        return isPrivate === !!token ? (
           <Component {...rest} />
         ) : (
-          <Redirect to={{ pathname: isPrivate ? "/" : "/login" }} />
+          <Redirect to={{ pathname: isPrivate ? "/" : "/mainpage" }} />
         );
       }}
     />
