@@ -14,6 +14,10 @@ export const Container = styled.header`
     cursor: pointer;
   }
 
+  button {
+    background: transparent;
+  }
+
   @media (max-width: 720px) {
     justify-content: center;
     img {
