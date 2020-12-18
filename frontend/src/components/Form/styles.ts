@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
 
   display: flex;
   justify-content: center;
@@ -79,7 +79,7 @@ export const Form = styled.form`
   > svg {
     cursor: pointer;
     display: block;
-    margin-left: auto;
+    margin-right: auto;
 
     :hover {
       animation: ${animationArrowToBack} 1s infinite;

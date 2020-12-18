@@ -6,17 +6,19 @@ import { IState } from "../../store";
 import { UserLoggedProps } from "../../store/modules/auth/types";
 import { Container, Form } from "./styles";
 
-interface SessionFormsProps {
+interface FormProps {
   title: string;
   buttonSubmitText: string;
   handleSubmitForm(): void;
+  routeBack: string;
 }
 
-const SessionForms: React.FC<SessionFormsProps> = ({
+const Forms: React.FC<FormProps> = ({
   children,
   title,
   buttonSubmitText,
   handleSubmitForm,
+  routeBack,
 }) => {
   const history = useHistory();
 
@@ -24,15 +26,15 @@ const SessionForms: React.FC<SessionFormsProps> = ({
     (state) => state.auth
   );
 
-  const handleNavigateToHomePage = useCallback(() => {
-    history.push("/");
-  }, [history]);
+  const handleNavigateBack = useCallback(() => {
+    history.push(routeBack);
+  }, [history, routeBack]);
 
   return (
     <Container>
       <Form onSubmit={handleSubmitForm}>
         <IoMdArrowBack
-          onClick={handleNavigateToHomePage}
+          onClick={handleNavigateBack}
           title="Voltar para pagina principal"
           color="#ffffff"
           size={25}
@@ -52,4 +54,4 @@ const SessionForms: React.FC<SessionFormsProps> = ({
   );
 };
 
-export default SessionForms;
+export default Forms;
