@@ -1,6 +1,6 @@
 import React from "react";
 import { IconBaseProps } from "react-icons";
-import { Container, Label } from "./styles";
+import { Container, Label, Error } from "./styles";
 
 type InputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -9,6 +9,7 @@ type InputProps = React.DetailedHTMLProps<
   label?: string;
   register: ({ required }: { required?: boolean }) => RefReturn;
   icon?: React.ComponentType<IconBaseProps>;
+  error?: string;
 };
 
 type RefReturn =
@@ -26,6 +27,7 @@ const Input: React.FC<InputProps> = ({
   required,
   placeholder,
   label,
+  error,
   ...rest
 }) => (
   <>
@@ -40,6 +42,7 @@ const Input: React.FC<InputProps> = ({
         {...rest}
       />
     </Container>
+    <Error>{error}</Error>
   </>
 );
 

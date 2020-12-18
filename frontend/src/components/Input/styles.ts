@@ -34,3 +34,10 @@ export const Label = styled.label`
   font-family: "Poppins", sans-serif;
   color: #ffffff;
 `;
+
+export const Error = styled.p`
+  color: #f64c75;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-family: "Poppins", sans-serif;
+`;
