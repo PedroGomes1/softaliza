@@ -7,6 +7,7 @@ import Form from "../../components/SessionForms";
 import Input from "../../components/Input";
 import { signUpSchema } from "../../validations";
 import api from "../../services/api";
+import { Container } from "./styles";
 
 interface SignUpPropsForm {
   name: string;
@@ -40,38 +41,40 @@ const SignUp: React.FC = () => {
   );
 
   return (
-    <Form
-      title="Crie sua conta"
-      buttonSubmitText="Criar conta"
-      handleSubmitForm={handleSubmit(handleSignUp)}
-    >
-      <Input
-        name="name"
-        type="text"
-        label="Seu nome"
-        error={errors.name?.message}
-        required
-        register={register}
-      />
+    <Container>
+      <Form
+        title="Crie sua conta"
+        buttonSubmitText="Criar conta"
+        handleSubmitForm={handleSubmit(handleSignUp)}
+      >
+        <Input
+          name="name"
+          type="text"
+          label="Seu nome"
+          error={errors.name?.message}
+          required
+          register={register}
+        />
 
-      <Input
-        name="email"
-        type="email"
-        label="Seu e-mail"
-        error={errors.email?.message}
-        required
-        register={register}
-      />
+        <Input
+          name="email"
+          type="email"
+          label="Seu e-mail"
+          error={errors.email?.message}
+          required
+          register={register}
+        />
 
-      <Input
-        name="password"
-        type="password"
-        label="Sua senha"
-        error={errors.password?.message}
-        required
-        register={register}
-      />
-    </Form>
+        <Input
+          name="password"
+          type="password"
+          label="Sua senha"
+          error={errors.password?.message}
+          required
+          register={register}
+        />
+      </Form>
+    </Container>
   );
 };
 

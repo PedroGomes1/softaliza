@@ -6,6 +6,7 @@ import Form from "../../components/SessionForms";
 import Input from "../../components/Input";
 import { signInRequest } from "../../store/modules/auth/action";
 import { signInSchema } from "../../validations";
+import { Container } from "./styles";
 
 export interface SignInPropsForm {
   email: string;
@@ -27,29 +28,31 @@ const SignIn: React.FC = () => {
   );
 
   return (
-    <Form
-      title="Faça seu login"
-      buttonSubmitText="Entrar"
-      handleSubmitForm={handleSubmit(handleLogin)}
-    >
-      <Input
-        name="email"
-        type="email"
-        label="Seu e-mail"
-        error={errors.email?.message}
-        required
-        register={register}
-      />
+    <Container>
+      <Form
+        title="Faça seu login"
+        buttonSubmitText="Entrar"
+        handleSubmitForm={handleSubmit(handleLogin)}
+      >
+        <Input
+          name="email"
+          type="email"
+          label="Seu e-mail"
+          error={errors.email?.message}
+          required
+          register={register}
+        />
 
-      <Input
-        name="password"
-        type="password"
-        required
-        error={errors.password?.message}
-        label="Sua senha"
-        register={register}
-      />
-    </Form>
+        <Input
+          name="password"
+          type="password"
+          required
+          error={errors.password?.message}
+          label="Sua senha"
+          register={register}
+        />
+      </Form>
+    </Container>
   );
 };
 
