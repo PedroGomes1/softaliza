@@ -13,6 +13,13 @@ export const Container = styled.header`
     height: 5rem;
     cursor: pointer;
   }
+
+  @media (max-width: 720px) {
+    justify-content: center;
+    img {
+      display: none;
+    }
+  }
 `;
 
 export const RightHeader = styled.div`
@@ -48,6 +55,14 @@ export const RightHeader = styled.div`
       opacity: 0.8;
     }
   }
+
+  @media (max-width: 510px) {
+    flex-direction: column;
+
+    button {
+      margin: 0 0 1.5rem;
+    }
+  }
 `;
 
 export const Separator = styled.div`
@@ -58,4 +73,8 @@ export const Separator = styled.div`
   margin: 0 2rem;
 
   cursor: pointer;
+
+  @media (max-width: 510px) {
+    display: none;
+  }
 `;

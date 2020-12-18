@@ -18,7 +18,7 @@ const Header: React.FC = () => {
       <RightHeader>
         <button type="button">Cadastrar eventos</button>
         <button type="button" onClick={handleNavigateEventTypes}>
-          Tipos de evento
+          Categoria dos eventos
         </button>
         <Separator />
         <BiLogOut size={30} title="Sair da aplicação" color="#f64c75" />
