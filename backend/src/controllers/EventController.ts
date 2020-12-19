@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, ILike } from 'typeorm';
 import Event from '../models/Event';
 
 class EventController {
@@ -8,7 +8,28 @@ class EventController {
 
     const events = await eventRepository.find();
 
-    return response.json(events);
+    const eventsData = events.map((event) => ({
+      ...event,
+      image_url: `http://localhost:3333/uploads/${event.image_url}`
+    }))
+
+    return response.json(eventsData);
+  }
+
+  async findByTitle(request: Request, response: Response) {
+    const { name } = request.query;
+    const eventRepository = getRepository(Event);
+
+    const events = await eventRepository.find({
+      title: ILike(`%${name}%`)
+    });
+
+    const data = events.map((event) => ({
+      ...event,
+      image_url: `http://localhost:3333/uploads/${event.image_url}`
+    }))
+
+    return response.json(data);
   }
 
   async create(request: Request, response: Response) {
@@ -36,7 +57,7 @@ class EventController {
       telephone,
       address,
       category_id,
-      image_url: requestImage.path,
+      image_url: requestImage.filename,
     });
 
     await eventRepository.save(events);

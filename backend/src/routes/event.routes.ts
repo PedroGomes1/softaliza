@@ -1,14 +1,20 @@
 import Router from 'express';
+import multer from 'multer';
 
 import { celebrate, Joi, Segments } from 'celebrate';
 import EventController from '../controllers/EventController';
+import uploadImage from '../config/uploadImage';
 
+const upload = multer(uploadImage);
 const routes = Router();
 
 routes.get('/', EventController.index);
 
+routes.get('/search', EventController.findByTitle);
+
 routes.post(
   '/',
+  upload.single('image'),
   celebrate({
     [Segments.BODY]: {
       title: Joi.string().required().min(5),
