@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Header from "../../../components/Header";
 import Input from "../../../components/Input";
 import Form from "../../../components/Form";
-import { registerNewCategory } from "../../../validations";
+import { eventCategorySchema } from "../../../validations";
 
 import { Container } from "./styles";
 import api from "../../../services/api";
@@ -24,7 +24,7 @@ const EditCategory: React.FC = () => {
   const [categoryEvent] = useState(state);
 
   const { register, handleSubmit, errors } = useForm<EditCategoryProps>({
-    resolver: yupResolver(registerNewCategory),
+    resolver: yupResolver(eventCategorySchema),
   });
 
   const handleEditCategory = useCallback(
@@ -61,6 +61,7 @@ const EditCategory: React.FC = () => {
             required
             defaultValue={categoryEvent.description}
             register={register}
+            autoFocus
           />
         </Form>
       </div>

@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import Header from "../../../components/Header";
 import Input from "../../../components/Input";
 import Form from "../../../components/Form";
-import { registerNewCategory } from "../../../validations";
+import { eventCategorySchema } from "../../../validations";
 
 import { Container } from "./styles";
 import api from "../../../services/api";
@@ -19,7 +19,7 @@ const RegisterCategory: React.FC = () => {
   const history = useHistory();
 
   const { register, handleSubmit, errors } = useForm<RegisterCategoryProps>({
-    resolver: yupResolver(registerNewCategory),
+    resolver: yupResolver(eventCategorySchema),
   });
 
   const handleRegisterCategory = useCallback(
@@ -55,6 +55,7 @@ const RegisterCategory: React.FC = () => {
             error={errors.description?.message}
             required
             register={register}
+            autoFocus
           />
         </Form>
       </div>
