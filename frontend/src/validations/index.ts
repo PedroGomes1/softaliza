@@ -1,5 +1,6 @@
 import signInSchema from "./signIn";
 import signUpSchema from "./signUp";
-import registerNewCategory from "./EventCategory";
+import eventSchema from "./Event";
+import eventCategorySchema from "./EventCategory";
 
-export { signInSchema, signUpSchema, registerNewCategory };
+export { signInSchema, signUpSchema, eventSchema, eventCategorySchema };
