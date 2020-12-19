@@ -1,5 +1,5 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useCallback, useState, ChangeEvent, useEffect } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { FiPlus } from "react-icons/fi";
@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import Header from "../../../components/Header";
 import Input from "../../../components/Input";
 import Form from "../../../components/Form";
-import { registerNewCategory } from "../../../validations";
+import { eventSchema } from "../../../validations";
 
 import { Container, WrapperInputFile, WrapperImage, Image } from "./styles";
 import api from "../../../services/api";
@@ -20,6 +20,7 @@ interface RegisterEventProps {
   hour: string;
   email: string;
   telephone: string;
+  image_url: string;
   address: string;
   category_id: string;
 }
@@ -37,7 +38,7 @@ const RegisterCategory: React.FC = () => {
   const [categoryEvents, setCategoryEvents] = useState<[]>([]);
 
   const { register, handleSubmit, errors } = useForm<RegisterEventProps>({
-    resolver: yupResolver(registerNewCategory),
+    resolver: yupResolver(eventSchema),
   });
 
   useEffect(() => {
@@ -103,10 +104,13 @@ const RegisterCategory: React.FC = () => {
           error={errors.title?.message}
           required
           register={register}
+          autoFocus
         />
 
         <label htmlFor="">Descrição</label>
-        <textarea name="description" ref={register({ required: true })} />
+
+        <textarea name="description" ref={register} />
+        <p>{errors.description?.message}</p>
 
         <Input
           name="date"
@@ -118,7 +122,7 @@ const RegisterCategory: React.FC = () => {
         />
 
         <label htmlFor="">Categoria</label>
-        <select name="category_id" ref={register}>
+        <select name="category_id" ref={register} required>
           {categoryEvents.map(({ id, description }: SelectProps) => (
             <option key={id} value={id}>
               {description}
@@ -156,7 +160,7 @@ const RegisterCategory: React.FC = () => {
         <Input
           name="address"
           type="text"
-          label="Endereço do evento (URL ou físico)"
+          label="Endereço do evento (URL ou Físico)"
           error={errors.address?.message}
           required
           register={register}
@@ -181,11 +185,13 @@ const RegisterCategory: React.FC = () => {
         )}
 
         <input
-          multiple
+          name="image_url"
           type="file"
           id="image[]"
           onChange={handleSelectImages}
+          ref={register}
         />
+        <p>{errors.image_url?.message}</p>
       </Form>
     </Container>
   );

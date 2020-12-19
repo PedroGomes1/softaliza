@@ -16,6 +16,13 @@ export const Container = styled.div`
   input[type="file"] {
     display: none;
   }
+
+  p {
+    color: #f64c75;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    font-family: "Poppins", sans-serif;
+  }
 `;
 
 export const WrapperInputFile = styled.div`
