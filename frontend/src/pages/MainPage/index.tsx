@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { MdSearch, MdEdit, MdDeleteForever } from "react-icons/md";
+import { MdSearch } from "react-icons/md";
 import Header from "../../components/Header";
 import CardEvent from "../../components/CardsEvent";
 
-import { Container, Wrapper, WrapperActionsCard } from "./styles";
+import { Container, Wrapper } from "./styles";
 import Input from "../../components/Input";
 
 const MainPage: React.FC = () => {
@@ -29,12 +29,7 @@ const MainPage: React.FC = () => {
         />
       </Wrapper>
 
-      <CardEvent titleSearch={titleSearch}>
-        <WrapperActionsCard>
-          <MdEdit size={25} color="#000000" />
-          <MdDeleteForever size={25} color="#f64c75" />
-        </WrapperActionsCard>
-      </CardEvent>
+      <CardEvent titleSearch={titleSearch} />
     </Container>
   );
 };

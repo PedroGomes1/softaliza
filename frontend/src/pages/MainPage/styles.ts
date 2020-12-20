@@ -16,17 +16,3 @@ export const Wrapper = styled.div`
     width: 85%;
   }
 `;
-
-export const WrapperActionsCard = styled.div`
-  display: flex;
-  justify-content: center;
-
-  svg {
-    margin: 1rem 0.5rem;
-    transition: 0.2s;
-    :hover {
-      background: #dedee4;
-      padding: 0.1rem;
-    }
-  }
-`;
