@@ -22,6 +22,7 @@ function* signIn({ payload }: signInRequestType) {
     );
 
     yield put(signInSuccess(response.data));
+    api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
   } catch (error) {
     yield put(signInFailure());
     toast.error("Erro ao fazer seu login");

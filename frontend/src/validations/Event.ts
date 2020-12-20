@@ -1,10 +1,7 @@
 import * as yup from "yup";
 
 const eventSchema = yup.object().shape({
-  title: yup
-    .string()
-    .min(5, "Mínimo de 5 caracteres")
-    .required("Campo obrigatório!"),
+  title: yup.string().min(5, "Mínimo de 5 caracteres"),
   description: yup.string().required("Campo obrigatório!"),
   date: yup.string().required("Campo obrigatório!"),
   hour: yup.string().required("Campo obrigatório!"),
