@@ -21,10 +21,9 @@ export default createGlobalStyle`
   body, #root {
     background: #121214;
     min-height: 100%;
-    height: 100%;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, p, button, legend, label, textarea {
     font-family: 'Poppins', sans-serif;
   }
 

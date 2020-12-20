@@ -12,7 +12,6 @@ export const Container = styled.div`
   legend {
     font-size: 3.2rem;
     color: #ffffff;
-    font-family: "Poppins", sans-serif;
     margin-bottom: 2rem;
 
     width: 100%;
@@ -34,7 +33,6 @@ export const Container = styled.div`
       color: #ffffff;
       border-radius: 0.8rem;
       font-size: 1.6rem;
-      font-family: "Poppins", sans-serif;
       transition: 0.5s;
 
       :hover {
@@ -46,7 +44,6 @@ export const Container = styled.div`
       display: block;
       margin: 2rem 0 0.5rem;
       font-size: 1.6rem;
-      font-family: "Poppins", sans-serif;
       color: #ffffff;
     }
 
@@ -57,7 +54,6 @@ export const Container = styled.div`
       min-height: 12.8rem;
       padding: 1rem 1.5rem;
       font-size: 1.6rem;
-      font-family: "Poppins", sans-serif;
     }
 
     select {

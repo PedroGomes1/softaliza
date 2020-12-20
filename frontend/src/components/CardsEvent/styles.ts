@@ -42,7 +42,6 @@ export const InformationsCard = styled.div`
   p {
     position: relative;
     font-size: 1.3rem;
-    font-family: "Poppins", sans-serif;
     width: 27rem;
     -webkit-box-orient: vertical;
     display: -webkit-box;

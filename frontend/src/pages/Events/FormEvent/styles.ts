@@ -21,7 +21,6 @@ export const Container = styled.div`
     color: #f64c75;
     font-size: 1.2rem;
     margin-top: 0.5rem;
-    font-family: "Poppins", sans-serif;
   }
 `;
 

@@ -42,7 +42,6 @@ export const RightHeader = styled.div`
     margin-left: 2rem;
 
     font-size: 1.6rem;
-    font-family: "Poppins", sans-serif;
 
     transition: 0.5s;
 
