@@ -39,35 +39,31 @@ const CardsEvent: React.FC<CardsEventProps> = ({ titleSearch }) => {
   const history = useHistory();
   const [events, setEvents] = useState<EventProps[]>([]);
 
+  const [loading, setLoading] = useState(true);
+
   const { token } = useSelector<IState, UserLoggedProps>((state) => state.auth);
 
   useEffect(() => {
     async function loadEvents() {
-      const response = await api.get("event");
+      const response = await api.get("event", {
+        params: {
+          name: titleSearch,
+        },
+      });
 
       const data = response.data.map((event: EventProps) => ({
         ...event,
+        dateFormatted: new Date(event.date).toLocaleDateString("pt-BR", {
+          timeZone: "UTC",
+        }),
       }));
 
       setEvents(data);
+      setLoading(false);
     }
     loadEvents();
-  }, []);
+  }, [titleSearch]);
 
-  useEffect(() => {
-    async function loadEvents() {
-      if (token) {
-        const response = await api.get("event/search", {
-          params: {
-            name: titleSearch,
-          },
-        });
-
-        setEvents(response.data);
-      }
-    }
-    loadEvents();
-  }, [titleSearch, token]);
   const handleNavigateToEditEvent = useCallback(
     (event: EventProps) => {
       history.push("/edit/event", {
@@ -104,47 +100,43 @@ const CardsEvent: React.FC<CardsEventProps> = ({ titleSearch }) => {
     },
     [events]
   );
-
   return (
     <ContainerCards>
-      {events.length ? (
-        events.map((event) => (
-          <CardEvent key={event.id}>
-            <Image src={event.image_url} />
+      {events.map((event) => (
+        <CardEvent key={event.id}>
+          <Image src={event.image_url} />
 
-            <InformationsCard>
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <p>
-                <strong>Data: </strong>
-                {new Intl.DateTimeFormat("pt-br").format(
-                  new Date(event.date)
-                )}{" "}
-                às {event.hour}
-              </p>
-              <p>
-                <strong>Localização: </strong>
-                {event.address}
-              </p>
-            </InformationsCard>
+          <InformationsCard>
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
+            <p>
+              <strong>Data: </strong>
+              {event.dateFormatted} às {event.hour}
+            </p>
+            <p>
+              <strong>Localização: </strong>
+              {event.address}
+            </p>
+          </InformationsCard>
 
-            {token && (
-              <WrapperActionsCard>
-                <MdEdit
-                  size={25}
-                  color="#000000"
-                  onClick={() => handleNavigateToEditEvent(event)}
-                />
-                <MdDeleteForever
-                  size={25}
-                  color="#f64c75"
-                  onClick={() => handleDeleteEvent(event.id)}
-                />
-              </WrapperActionsCard>
-            )}
-          </CardEvent>
-        ))
-      ) : (
+          {token && (
+            <WrapperActionsCard>
+              <MdEdit
+                size={25}
+                color="#000000"
+                onClick={() => handleNavigateToEditEvent(event)}
+              />
+              <MdDeleteForever
+                size={25}
+                color="#f64c75"
+                onClick={() => handleDeleteEvent(event.id)}
+              />
+            </WrapperActionsCard>
+          )}
+        </CardEvent>
+      ))}
+
+      {loading && (
         <ContainerLoading>
           <ReactLoading
             type="spinningBubbles"
