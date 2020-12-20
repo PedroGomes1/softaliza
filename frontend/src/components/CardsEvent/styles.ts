@@ -21,7 +21,6 @@ export const CardEvent = styled.div`
 
   border-radius: 1rem;
   margin-bottom: 2rem;
-  cursor: pointer;
   box-shadow: rgb(255, 250, 255) 0px 4px 18px -6px;
 
   transition: 0.2s;
@@ -68,4 +67,28 @@ export const Image = styled.div<ImageProps>`
   background-position: 50% 50%;
   border-top-left-radius: 0.8rem;
   border-top-right-radius: 0.8rem;
+`;
+
+export const WrapperActionsCard = styled.div`
+  display: flex;
+  justify-content: center;
+
+  svg {
+    cursor: pointer;
+    margin: 1rem 0.5rem;
+    transition: 0.2s;
+
+    :hover {
+      background: #dedee4;
+      padding: 0.1rem;
+    }
+  }
+`;
+
+export const ContainerLoading = styled.div`
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
