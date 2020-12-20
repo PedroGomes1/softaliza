@@ -7,10 +7,9 @@ class EventController {
     const eventRepository = getRepository(Event);
 
     const events = await eventRepository.find();
-
     const eventsData = events.map((event) => ({
       ...event,
-      image_url: `http://localhost:3333/uploads/${event.image_url}`
+      image_url: `${process.env.APP_URL}/uploads/${event.image_url}`
     }))
 
     return response.json(eventsData);
@@ -26,7 +25,7 @@ class EventController {
 
     const data = events.map((event) => ({
       ...event,
-      image_url: `http://localhost:3333/uploads/${event.image_url}`
+      image_url: `${process.env.APP_URL}/uploads/${event.image_url}`
     }))
 
     return response.json(data);
@@ -43,7 +42,6 @@ class EventController {
       address,
       category_id,
     } = request.body;
-
     const requestImage = request.file;
 
     const eventRepository = getRepository(Event);
@@ -67,7 +65,6 @@ class EventController {
 
   async update(request: Request, response: Response) {
     const { idEvent } = request.params;
-
     const {
       title,
       description,
@@ -78,6 +75,7 @@ class EventController {
       address,
       category_id,
     } = request.body;
+    const requestImage = request.file;
 
     const eventRepository = getRepository(Event);
 
@@ -96,6 +94,7 @@ class EventController {
       telephone,
       address,
       category_id,
+      image_url: requestImage?.filename || event.image_url,
     };
 
     const updatedEvent = await eventRepository.save({

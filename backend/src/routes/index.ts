@@ -11,7 +11,8 @@ const routes = Router();
 routes.use('/session', Session);
 routes.use('/user', User);
 
-routes.use('/event', EnsureAuthenticate, Event);
+routes.use('/event', Event);
+
 routes.use('/event-category', EnsureAuthenticate, CategoryEvent);
 
 export default routes;

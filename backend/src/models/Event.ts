@@ -2,13 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-import EventCategory from './EventCategory';
 
 @Entity('events')
 export default class Events {
@@ -36,9 +33,8 @@ export default class Events {
   @Column()
   address: string;
 
-  @OneToOne(() => EventCategory)
-  @JoinColumn({ name: 'category_id' })
-  category_id: EventCategory;
+  @Column()
+  category_id: string;
 
   @Column()
   image_url: string;

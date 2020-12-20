@@ -8,9 +8,12 @@ import uploadImage from '../config/uploadImage';
 const upload = multer(uploadImage);
 const routes = Router();
 
-routes.get('/', EventController.index);
+import EnsureAuthenticate from '../middleware/EnsureAuthenticate';
 
+routes.get('/', EventController.index);
 routes.get('/search', EventController.findByTitle);
+
+routes.use(EnsureAuthenticate);
 
 routes.post(
   '/',
@@ -32,6 +35,7 @@ routes.post(
 
 routes.put(
   '/:idEvent',
+  upload.single('image'),
   celebrate({
     [Segments.BODY]: {
       title: Joi.string().required(),
