@@ -23,7 +23,7 @@ export default class events1608071969865 implements MigrationInterface {
           },
           {
             name: 'date',
-            type: 'date',
+            type: 'timestamptz',
           },
           {
             name: 'hour',
