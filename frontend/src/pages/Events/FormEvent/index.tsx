@@ -106,7 +106,12 @@ const FormEvent: React.FC<FormEventProps> = ({
         />
 
         <label htmlFor="">Categoria</label>
-        <select name="category_id" ref={register} required>
+        <select
+          name="category_id"
+          ref={register}
+          defaultValue={eventData?.category_id}
+          required
+        >
           {categoryEvents.map(({ id, description }: SelectProps) => (
             <option
               key={id}
