@@ -4,31 +4,18 @@ import Event from '../models/Event';
 
 class EventController {
   async index(request: Request, response: Response) {
-    const eventRepository = getRepository(Event);
-
-    const events = await eventRepository.find();
-    const eventsData = events.map((event) => ({
-      ...event,
-      image_url: `${process.env.APP_URL}/uploads/${event.image_url}`
-    }))
-
-    return response.json(eventsData);
-  }
-
-  async findByTitle(request: Request, response: Response) {
     const { name } = request.query;
     const eventRepository = getRepository(Event);
 
     const events = await eventRepository.find({
       title: ILike(`%${name}%`)
     });
-
-    const data = events.map((event) => ({
+    const eventsData = events.map((event) => ({
       ...event,
       image_url: `${process.env.APP_URL}/uploads/${event.image_url}`
     }))
 
-    return response.json(data);
+    return response.json(eventsData);
   }
 
   async create(request: Request, response: Response) {

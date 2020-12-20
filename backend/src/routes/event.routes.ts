@@ -11,7 +11,6 @@ const routes = Router();
 import EnsureAuthenticate from '../middleware/EnsureAuthenticate';
 
 routes.get('/', EventController.index);
-routes.get('/search', EventController.findByTitle);
 
 routes.use(EnsureAuthenticate);
 
