@@ -10,6 +10,7 @@ import EventTypes from "../pages/EventCategory";
 import RegisterNewCategory from "../pages/EventCategory/Register";
 import EditCategory from "../pages/EventCategory/Edit";
 import RegisterEvent from "../pages/Events/Register";
+import EditEvent from "../pages/Events/Edit";
 
 import Route from "./Route";
 
@@ -35,6 +36,7 @@ const Routes: React.FC = () => (
         isPrivate
       />
       <Route path="/register/event" exact component={RegisterEvent} isPrivate />
+      <Route path="/edit/event" exact component={EditEvent} isPrivate />
     </Switch>
   </BrowserRouter>
 );
