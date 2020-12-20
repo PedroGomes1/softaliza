@@ -11,3 +11,25 @@ export const Container = styled.div`
     text-align: center;
   }
 `;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    margin-right: 5rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 855px) {
+    svg {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
+`;
