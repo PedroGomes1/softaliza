@@ -1,14 +1,9 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import Header from "../../../components/Header";
-import Input from "../../../components/Input";
-import Form from "../../../components/Form";
-import { eventCategorySchema } from "../../../validations";
+import Fields, { EventCategoryProps } from "../FormEventCategory";
 
-import { Container } from "./styles";
 import api from "../../../services/api";
 
 interface EditCategoryProps {
@@ -23,12 +18,8 @@ const EditCategory: React.FC = () => {
 
   const [categoryEvent] = useState(state);
 
-  const { register, handleSubmit, errors } = useForm<EditCategoryProps>({
-    resolver: yupResolver(eventCategorySchema),
-  });
-
   const handleEditCategory = useCallback(
-    async ({ description }: EditCategoryProps) => {
+    async ({ description }: EventCategoryProps) => {
       try {
         await api.put(`event-category/${categoryEvent.id}`, {
           description,
@@ -44,28 +35,15 @@ const EditCategory: React.FC = () => {
   );
 
   return (
-    <Container>
+    <>
       <Header />
-      <div>
-        <Form
-          title="Editar categoria"
-          handleSubmitForm={handleSubmit(handleEditCategory)}
-          buttonSubmitText="Salvar"
-          routeBack="/event-category"
-        >
-          <Input
-            name="description"
-            type="text"
-            label="Descrição da categoria"
-            error={errors.description?.message}
-            required
-            defaultValue={categoryEvent.description}
-            register={register}
-            autoFocus
-          />
-        </Form>
-      </div>
-    </Container>
+
+      <Fields
+        titleButton="Salvar"
+        titleForm="Editar categoria"
+        handleSubmitFormEventCategory={handleEditCategory}
+      />
+    </>
   );
 };
 

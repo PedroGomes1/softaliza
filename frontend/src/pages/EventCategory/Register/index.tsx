@@ -1,29 +1,16 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useCallback } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import Header from "../../../components/Header";
-import Input from "../../../components/Input";
-import Form from "../../../components/Form";
-import { eventCategorySchema } from "../../../validations";
+import Fields, { EventCategoryProps } from "../FormEventCategory";
 
-import { Container } from "./styles";
 import api from "../../../services/api";
-
-interface RegisterCategoryProps {
-  description: string;
-}
 
 const RegisterCategory: React.FC = () => {
   const history = useHistory();
 
-  const { register, handleSubmit, errors } = useForm<RegisterCategoryProps>({
-    resolver: yupResolver(eventCategorySchema),
-  });
-
   const handleRegisterCategory = useCallback(
-    async ({ description }: RegisterCategoryProps) => {
+    async ({ description }: EventCategoryProps) => {
       try {
         await api.post("event-category", {
           description,
@@ -39,27 +26,15 @@ const RegisterCategory: React.FC = () => {
   );
 
   return (
-    <Container>
+    <>
       <Header />
-      <div>
-        <Form
-          title="Nova categoria"
-          handleSubmitForm={handleSubmit(handleRegisterCategory)}
-          buttonSubmitText="Cadastrar"
-          routeBack="/event-category"
-        >
-          <Input
-            name="description"
-            type="text"
-            label="Descrição da categoria"
-            error={errors.description?.message}
-            required
-            register={register}
-            autoFocus
-          />
-        </Form>
-      </div>
-    </Container>
+
+      <Fields
+        titleButton="Cadastrar"
+        titleForm="Nova categoria"
+        handleSubmitFormEventCategory={handleRegisterCategory}
+      />
+    </>
   );
 };
 
