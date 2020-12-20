@@ -35,7 +35,7 @@ interface EventProps {
   category_id: number;
 }
 
-const CardsEvent: React.FC<CardsEventProps> = ({ titleSearch }) => {
+const CardsEvent: React.FC<CardsEventProps> = ({ titleSearch = "" }) => {
   const history = useHistory();
   const [events, setEvents] = useState<EventProps[]>([]);
 
@@ -57,7 +57,6 @@ const CardsEvent: React.FC<CardsEventProps> = ({ titleSearch }) => {
           timeZone: "UTC",
         }),
       }));
-
       setEvents(data);
       setLoading(false);
     }
