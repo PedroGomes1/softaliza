@@ -1,57 +1,16 @@
-import React, { useCallback, useState, ChangeEvent, useEffect } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import React, { useCallback } from "react";
 import { toast } from "react-toastify";
-import { FiPlus } from "react-icons/fi";
-import { MdClose } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import Header from "../../../components/Header";
-import Input from "../../../components/Input";
-import Form from "../../../components/Form";
-import { eventSchema } from "../../../validations";
-
-import { Container, WrapperInputFile, WrapperImage, Image } from "./styles";
+import Fields from "../FormEvent";
+import { EventFormData } from "../FormEvent";
 import api from "../../../services/api";
 
-interface RegisterEventProps {
-  title: string;
-  description: string;
-  date: string;
-  hour: string;
-  email: string;
-  telephone: string;
-  image_url: string;
-  address: string;
-  category_id: string;
-}
-
-interface SelectProps {
-  id: number;
-  description: string;
-}
-
-const RegisterCategory: React.FC = () => {
+const RegisterEvent: React.FC = () => {
   const history = useHistory();
 
-  const [previewImage, setPreviewImage] = useState("");
-  const [image, setImage] = useState<File>({} as File);
-  const [categoryEvents, setCategoryEvents] = useState<[]>([]);
-
-  const { register, handleSubmit, errors } = useForm<RegisterEventProps>({
-    resolver: yupResolver(eventSchema),
-  });
-
-  useEffect(() => {
-    async function loadCategoryEvents() {
-      const response = await api.get("event-category");
-
-      setCategoryEvents(response.data);
-    }
-    loadCategoryEvents();
-  }, []);
-
   const handleRegisterEvent = useCallback(
-    async (dataForm: RegisterEventProps) => {
+    async (dataForm: EventFormData) => {
       const data = new FormData();
 
       data.append("title", dataForm.title);
@@ -61,8 +20,8 @@ const RegisterCategory: React.FC = () => {
       data.append("email", dataForm.email);
       data.append("telephone", dataForm.telephone);
       data.append("address", dataForm.address);
-      data.append("category_id", dataForm.category_id);
-      data.append("image", image);
+      data.append("category_id", String(dataForm.category_id));
+      data.append("image", dataForm.image_url[0]);
 
       try {
         await api.post("event", data);
@@ -73,128 +32,20 @@ const RegisterCategory: React.FC = () => {
         toast.error("Erro ao cadastrar evento");
       }
     },
-    [history, image]
+    [history]
   );
 
-  function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
-    if (!event.target.files) {
-      return;
-    }
-    const selectedImage = event.target.files[0];
-    setImage(selectedImage);
-
-    const imagePreview = URL.createObjectURL(selectedImage);
-
-    setPreviewImage(imagePreview);
-  }
-
   return (
-    <Container>
+    <div>
       <Header />
-      <Form
-        title="Registrar novo evento"
-        handleSubmitForm={handleSubmit(handleRegisterEvent)}
-        buttonSubmitText="Cadastrar"
-        routeBack="/mainpage"
-      >
-        <Input
-          name="title"
-          type="text"
-          label="Titulo do do evento"
-          error={errors.title?.message}
-          required
-          register={register}
-          autoFocus
-        />
 
-        <label htmlFor="">Descrição</label>
-
-        <textarea name="description" ref={register} />
-        <p>{errors.description?.message}</p>
-
-        <Input
-          name="date"
-          type="date"
-          label="Data do evento"
-          error={errors.date?.message}
-          required
-          register={register}
-        />
-
-        <label htmlFor="">Categoria</label>
-        <select name="category_id" ref={register} required>
-          {categoryEvents.map(({ id, description }: SelectProps) => (
-            <option key={id} value={id}>
-              {description}
-            </option>
-          ))}
-        </select>
-
-        <Input
-          name="hour"
-          type="time"
-          label="Hora do evento"
-          error={errors.hour?.message}
-          required
-          register={register}
-        />
-
-        <Input
-          name="email"
-          type="email"
-          label="E-mail para contato"
-          error={errors.email?.message}
-          required
-          register={register}
-        />
-
-        <Input
-          name="telephone"
-          type="tel"
-          label="Telefone para contato"
-          error={errors.telephone?.message}
-          required
-          register={register}
-        />
-
-        <Input
-          name="address"
-          type="text"
-          label="Endereço do evento (URL ou Físico)"
-          error={errors.address?.message}
-          required
-          register={register}
-        />
-
-        <label htmlFor="">Imagem do evento</label>
-        {previewImage ? (
-          <WrapperImage>
-            <Image src={previewImage} />
-            <MdClose
-              size={25}
-              color="#f64c75"
-              onClick={() => setPreviewImage("")}
-            />
-          </WrapperImage>
-        ) : (
-          <WrapperInputFile>
-            <label htmlFor="image[]">
-              <FiPlus size={24} color="#15b6d6" />
-            </label>
-          </WrapperInputFile>
-        )}
-
-        <input
-          name="image_url"
-          type="file"
-          id="image[]"
-          onChange={handleSelectImages}
-          ref={register}
-        />
-        <p>{errors.image_url?.message}</p>
-      </Form>
-    </Container>
+      <Fields
+        titleForm="Registrar novo evento"
+        titleButton="Cadastrar"
+        handleSubmitFormEvent={handleRegisterEvent}
+      />
+    </div>
   );
 };
 
-export default RegisterCategory;
+export default RegisterEvent;
